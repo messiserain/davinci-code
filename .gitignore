@@ -25,3 +25,18 @@ replay_pid*
 bin/
 .settings/
 .metadata/
+
+# Images and sounds (kept local only)
+assets/
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.bmp
+*.ico
+*.wav
+*.mp3
+*.ogg
+*.aiff
+*.au
+*.mid
