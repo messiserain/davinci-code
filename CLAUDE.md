@@ -9,7 +9,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - **오픈소스 코드를 쓰지 않는다.** 서버와 클라이언트 코드는 모두 직접 작성한다. 외부 라이브러리나 프레임워크를 추가하지 말고 JDK 표준 라이브러리만 쓴다.
 - 일정: 11월 말까지 1순위인 2인 대전을 완성하고, 12월에 2·3순위 기능을 붙인 뒤 시연 영상을 찍는다.
 
-현재 `src/`는 비어 있고 코드는 아직 없다. 아래 구조는 제안서에서 정한 설계 방향이다.
+현재 접속·닉네임·채팅·귓속말 코드가 있고(`Hub`, `Connection`, `NetClient`, `MainFrame`, `ChatPanel`), 게임 진행은 아직 없다. 게임 명령어는 `davinci.server.GameHandlers`에 등록한다. 시험 코드는 `test/`에 있고 `main`으로 돌린다(`davinci.ChatTest`).
 
 ## Java 버전
 
