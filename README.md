@@ -78,6 +78,13 @@ java -cp bin <메인 클래스의 전체 이름>
 서버를 먼저 띄운 뒤 클라이언트를 여러 개 실행해서 시험해요. 클라이언트는 서버 IP와 포트로 접속해요.
 서버와 클라이언트의 메인 클래스가 생기면 이 자리에 실행 명령을 적을게요.
 
+게임 규칙 시험은 `test/`에 있고, 테스트 프레임워크 없이 main으로 돌려요. 실패가 있으면 종료 코드가 1이에요.
+
+```bash
+javac --release 21 -encoding UTF-8 -d bin $(find src test -name "*.java")
+java -cp bin davinci.server.GameStateTest
+```
+
 Eclipse에서는 이 폴더를 기존 프로젝트로 가져오면 돼요(`.project`, `.classpath` 포함). 인코딩은 UTF-8, Java Compiler 준수 수준은 21로 맞춰요.
 
 ## 구조
