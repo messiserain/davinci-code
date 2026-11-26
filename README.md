@@ -9,7 +9,7 @@
 | 팀 | stim (고제윤, 임재윤) |
 | 사용 기술 | Java 21 (소켓, 스레드, Swing) |
 | 오픈소스 | 쓰지 않아요. 서버와 클라이언트 코드를 모두 직접 작성하고, JDK 표준 라이브러리만 써요 |
-| 진행 상황 | 개발 준비 단계 (코드 작성 전) |
+| 진행 상황 | 접속·닉네임·채팅·귓속말 완성, 게임 진행 개발 중 |
 
 ## 게임 규칙
 
@@ -75,8 +75,20 @@ javac --release 21 -encoding UTF-8 -d bin $(find src -name "*.java")
 java -cp bin <메인 클래스의 전체 이름>
 ```
 
-서버를 먼저 띄운 뒤 클라이언트를 여러 개 실행해서 시험해요. 클라이언트는 서버 IP와 포트로 접속해요.
-서버와 클라이언트의 메인 클래스가 생기면 이 자리에 실행 명령을 적을게요.
+서버를 먼저 띄운 뒤 클라이언트를 여러 개(최대 4개) 실행해서 시험해요. 레포 최상위 폴더에서 실행해요.
+
+```bash
+java -Dstdout.encoding=UTF-8 -cp bin davinci.server.GameServer        # 서버 (기본 포트 30000, 다른 포트는 뒤에 숫자로)
+java -cp bin davinci.client.ui.ClientMain                             # 클라이언트 (접속 창에서 주소·포트·닉네임 입력)
+```
+
+시험 코드는 `test/`에 있어요. 테스트 프레임워크 없이 `main`으로 돌려요.
+
+```bash
+javac --release 21 -encoding UTF-8 -d bin $(find src test -name "*.java")
+java -Dstdout.encoding=UTF-8 -cp bin davinci.ChatTest                 # 화면 없이 소켓으로 채팅 기능 검사
+java -cp bin davinci.client.ui.Shots shots                            # 창 3개로 채팅한 뒤 화면을 shots/에 저장
+```
 
 Eclipse에서는 이 폴더를 기존 프로젝트로 가져오면 돼요(`.project`, `.classpath` 포함). 인코딩은 UTF-8, Java Compiler 준수 수준은 21로 맞춰요.
 
@@ -88,6 +100,7 @@ src/davinci/
 ├─ server/     서버 메인, 접속 관리(클라이언트마다 스레드), 방·대기실, 게임 상태와 규칙 판정
 └─ client/     클라이언트 메인, 서버 연결과 메시지 송수신
    └─ ui/      Swing 화면: 접속, 대기실, 게임판, 결과
+test/davinci/  시험 코드 (ChatTest, Shots)
 ```
 
 - **서버가 판정해요.** 타일 섞기·분배·정렬, 추리 판정, 탈락과 승패는 모두 서버가 정하고, 클라이언트는 입력을 보내고 화면을 그리기만 해요.
